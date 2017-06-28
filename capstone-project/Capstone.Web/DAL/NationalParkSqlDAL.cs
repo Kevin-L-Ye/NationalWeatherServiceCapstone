@@ -11,14 +11,16 @@ namespace Capstone.Web.DAL
     {
         private string connectionString;
         private IWeatherDAL weatherDAL;
+        private ISurveyDAL surveyDAL;
 
         private string SQL_GetAllParks = @"SELECT * FROM park;";
         readonly string SQL_GetParkCodes = "SELECT parkCode FROM park GROUP BY parkCode;";
 
-        public NationalParkSqlDAL (string connectionString, IWeatherDAL weatherDAL)
+        public NationalParkSqlDAL (string connectionString, IWeatherDAL weatherDAL, ISurveyDAL surveyDAL)
         {
             this.connectionString = connectionString;
             this.weatherDAL = weatherDAL;
+            this.surveyDAL = surveyDAL;
         }
 
         public List<NationalPark> GetAllParks()
@@ -94,6 +96,37 @@ namespace Capstone.Web.DAL
                 NumberOfAnimalSpecies = Convert.ToInt32(reader["numberOfAnimalSpecies"]),
                 NextFiveDayWeather = weather
             };
+        }
+
+        public Dictionary<string, int> CalculateFavoriteParks()
+        {
+            Dictionary<string, int> favoriteParks = new Dictionary<string, int>();
+            List<string> codes = GetParkCodes();
+            List<Survey> surveys = surveyDAL.GetAllSurveys();
+            foreach(Survey item in surveys)
+            {
+                if (favoriteParks.ContainsKey(item.ParkCode))
+                {
+                    favoriteParks[item.ParkCode] += 1;
+                }
+                else
+                {
+                    favoriteParks.Add(item.ParkCode, 1);
+                }
+            }
+            return favoriteParks;
+        }
+
+        public List<NationalPark> GetFavoriteParks()
+        {
+            List<NationalPark> favorites = new List<NationalPark>();
+            List<NationalPark> allParks = GetAllParks();
+            Dictionary<string, int> surveyParks = CalculateFavoriteParks();
+
+            foreach(KeyValuePair<string, int> kvp in surveyParks)
+            {
+
+            }
         }
     }
 }

@@ -11,9 +11,11 @@ namespace Capstone.Web.Controllers
     public class HomeController : Controller
     {
         private INationalParkDAL parkDAL;
-        public HomeController(INationalParkDAL parkDAL)
+        private ISurveyDAL surveyDAL;
+        public HomeController(INationalParkDAL parkDAL, ISurveyDAL surveyDAL)
         {
             this.parkDAL = parkDAL;
+            this.surveyDAL = surveyDAL;
         }
 
         // GET: Home
@@ -44,6 +46,13 @@ namespace Capstone.Web.Controllers
             model.ValidParkCodes = ConvertListToSelectList(parks);
 
             return View("SurveyView", model);
+        }
+
+        [HttpPost]
+        public ActionResult SurveyView(Survey newSurvey)
+        {
+            surveyDAL.SaveSurvey(newSurvey);
+            return RedirectToAction("FavoriteParks");
         }
 
         public List<SelectListItem> ConvertListToSelectList(List<NationalPark> parkCodes)

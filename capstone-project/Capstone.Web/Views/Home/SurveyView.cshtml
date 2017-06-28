@@ -27,6 +27,13 @@
             @Html.TextBoxFor(m => m.State)
         </div>
 
+        <div>
+            @Html.RadioButtonFor(m => m.ActivityLevel, "Inactive", false)Inactive
+            @Html.RadioButtonFor(m => m.ActivityLevel, "Sedentary", false)Sedentary
+            @Html.RadioButtonFor(m => m.ActivityLevel, "Active", false)Active
+            @Html.RadioButtonFor(m => m.ActivityLevel, "Extremely Active", false)Extremely Active
+        </div>
+
         <button>Submit</button>
     }
 </section>
