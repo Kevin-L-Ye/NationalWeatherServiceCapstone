@@ -1,0 +1,28 @@
+﻿@using Capstone.Web.Models;
+@model List<NationalPark>
+
+@{
+    ViewBag.Title = "HomePage";
+    Layout = "~/Views/Shared/shared_layout.cshtml";
+}
+
+<section class="centeredPanel">
+
+    <h2>Home Page</h2>
+
+    <div>
+        @foreach (NationalPark park in Model)
+        {
+           <div>
+                <a href="@Url.Action("ParkDetailPage", "Home", new { id = park.ParkCode })" >
+                    <img src="@("/Content/img/parks/" + park.ParkCode.ToLower() + ".jpg")" />
+               </a>
+           </div> 
+
+           <div>@park.ParkName</div>
+           <div>@park.State</div>
+           <div>@park.ParkDescription</div>
+        }
+    </div>
+
+</section>

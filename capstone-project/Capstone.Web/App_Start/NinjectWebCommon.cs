@@ -10,6 +10,9 @@ namespace Capstone.Web.App_Start
 
     using Ninject;
     using Ninject.Web.Common;
+    using DAL;
+    using System.Configuration;
+    using Capstone.Web.Models;
 
     public static class NinjectWebCommon 
     {
@@ -61,6 +64,8 @@ namespace Capstone.Web.App_Start
         /// <param name="kernel">The kernel.</param>
         private static void RegisterServices(IKernel kernel)
         {
-        }        
+            kernel.Bind<INationalParkDAL>().To<NationalParkSqlDAL>().WithConstructorArgument("connectionString", ConfigurationManager.ConnectionStrings["GeekParks"].ConnectionString);
+
+        }
     }
 }
