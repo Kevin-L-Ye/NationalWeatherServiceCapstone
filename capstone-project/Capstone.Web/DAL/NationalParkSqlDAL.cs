@@ -10,12 +10,15 @@ namespace Capstone.Web.DAL
     public class NationalParkSqlDAL : INationalParkDAL
     {
         private string connectionString;
-        
+        private IWeatherDAL weatherDAL;
+
         private string SQL_GetAllParks = @"SELECT * FROM park;";
-        
-        public NationalParkSqlDAL (string connectionString)
+        readonly string SQL_GetParkCodes = "SELECT parkCode FROM park GROUP BY parkCode;";
+
+        public NationalParkSqlDAL (string connectionString, IWeatherDAL weatherDAL)
         {
             this.connectionString = connectionString;
+            this.weatherDAL = weatherDAL;
         }
 
         public List<NationalPark> GetAllParks()
@@ -43,9 +46,35 @@ namespace Capstone.Web.DAL
             return parks;
         }
 
+        public List<string> GetParkCodes()
+        {
+            List<string> validParks = new List<string>();
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(connectionString))
+                {
+                    conn.Open();
+                    SqlCommand cmd = new SqlCommand(SQL_GetParkCodes, conn);
+                    SqlDataReader reader = cmd.ExecuteReader();
+
+                    while (reader.Read())
+                    {
+                        validParks.Add(Convert.ToString(reader["parkCode"]));
+                    }
+
+                }
+            }
+            catch (SqlException ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            return validParks;
+        }
 
         public NationalPark PopulateParkObject(SqlDataReader reader)
         {
+            List<Weather> weather = weatherDAL.GetWeather(Convert.ToString(reader["parkCode"]));
+
             return new NationalPark()
             {
                 ParkCode = Convert.ToString(reader["parkCode"]),
@@ -62,7 +91,8 @@ namespace Capstone.Web.DAL
                 InspirationalQuoteSource = Convert.ToString(reader["inspirationalQuoteSource"]),
                 ParkDescription = Convert.ToString(reader["parkDescription"]),
                 EntryFee = Convert.ToInt32(reader["entryFee"]),
-                NumberOfAnimalSpecies = Convert.ToInt32(reader["numberOfAnimalSpecies"])
+                NumberOfAnimalSpecies = Convert.ToInt32(reader["numberOfAnimalSpecies"]),
+                NextFiveDayWeather = weather
             };
         }
     }

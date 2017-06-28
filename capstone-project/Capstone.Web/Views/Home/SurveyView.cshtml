@@ -1,0 +1,32 @@
+﻿@using Capstone.Web.Models;
+@model Survey
+
+@{
+    ViewBag.Title = "SurveyView";
+    Layout = "~/Views/Shared/shared_layout.cshtml";
+}
+
+<section class="centeredPanel">
+
+    <h2>Survey</h2>
+
+    @using (Html.BeginForm("SurveyView", "Home", FormMethod.Post))
+    {
+        <div class="formInputGroup">
+            <label>Favorite National Park: </label>
+            @Html.DropDownListFor(m => m.ParkCode, Model.ValidParkCodes)
+        </div>
+
+        <div class="formInputGroup">
+            <label>Your email: </label>
+            @Html.TextBoxFor(m => m.EmailAddress)
+        </div>
+
+        <div class="formInputGroup">
+            <label>State of Residence</label>
+            @Html.TextBoxFor(m => m.State)
+        </div>
+
+        <button>Submit</button>
+    }
+</section>

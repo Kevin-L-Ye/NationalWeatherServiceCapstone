@@ -16,7 +16,7 @@ namespace Capstone.Web.Controllers.Tests
         public void HomeController_IndexAction_ReturnIndexView()
         {
             //Arrange
-            HomeController controller = new HomeController();
+            //HomeController controller = new HomeController();
 
             //Act
             ViewResult result = controller.Index() as ViewResult;

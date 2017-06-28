@@ -13,5 +13,15 @@ namespace Capstone.Web.Models
         public int Low { get; set; }
         public int High { get; set; }
         public string Forecast { get; set; }
+
+        public int FahrenheitToCelsius(int fTemp)
+        {
+            return (fTemp - 32) * (5 / 9);
+        }
+
+        public int CelsiusToFarenheit(int cTemp)
+        {
+            return (cTemp * (9 / 5) + 32);
+        }
     }
 }

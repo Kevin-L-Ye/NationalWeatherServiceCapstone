@@ -10,8 +10,8 @@ namespace Capstone.Web.DAL
     public class WeatherSqlDAL : IWeatherDAL
     {
         private string connectionString;
-        public string SQL_GetWeather = @"SELECT * FROM weather;";
-        public string SQL_GetWeatherForPark = "SELECT * FROM weather WHERE parkCode = @parkCode;";
+        public string SQL_GetWeather = @"SELECT * FROM weather ORDER BY parkCode ASC, fiveDayForecastValue ASC;";
+        public string SQL_GetWeatherForPark = "SELECT * FROM weather WHERE parkCode = @parkCode ORDER BY parkCode ASC, fiveDayForecastValue ASC;";
 
         public WeatherSqlDAL(string connectionString)
         {

@@ -32,8 +32,31 @@ namespace Capstone.Web.Controllers
         {
             List<NationalPark> parks = parkDAL.GetAllParks();
             NationalPark model = parks.FirstOrDefault(p => p.ParkCode == code);
+            model.ValidParkCodes = ConvertListToSelectList(parks);
 
             return View("ParkDetail", model);
+        }
+
+        public ActionResult SurveyView()
+        {
+            List<NationalPark> parks = parkDAL.GetAllParks();
+            Survey model = new Survey();
+            model.ValidParkCodes = ConvertListToSelectList(parks);
+
+            return View("SurveyView", model);
+        }
+
+        public List<SelectListItem> ConvertListToSelectList(List<NationalPark> parkCodes)
+        {
+            List<SelectListItem> dropdownlist = new List<SelectListItem>();
+            
+            foreach (NationalPark n in parkCodes)
+            {
+                SelectListItem choice = new SelectListItem() { Text = n.ParkName, Value = n.ParkCode };
+                dropdownlist.Add(choice);
+            }
+
+            return dropdownlist;
         }
     }
 }

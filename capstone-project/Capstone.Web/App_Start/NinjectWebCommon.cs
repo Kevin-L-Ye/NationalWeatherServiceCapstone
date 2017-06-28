@@ -65,7 +65,7 @@ namespace Capstone.Web.App_Start
         private static void RegisterServices(IKernel kernel)
         {
             kernel.Bind<INationalParkDAL>().To<NationalParkSqlDAL>().WithConstructorArgument("connectionString", ConfigurationManager.ConnectionStrings["GeekParks"].ConnectionString);
-
+            kernel.Bind<IWeatherDAL>().To<WeatherSqlDAL>().WithConstructorArgument("connectionString", ConfigurationManager.ConnectionStrings["GeekParks"].ConnectionString);
         }
     }
 }

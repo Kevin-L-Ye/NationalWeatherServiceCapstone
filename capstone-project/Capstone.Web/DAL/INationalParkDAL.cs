@@ -10,5 +10,6 @@ namespace Capstone.Web.DAL
     public interface INationalParkDAL
     {
         List<NationalPark> GetAllParks();
+        List<string> GetParkCodes();
     }
 }

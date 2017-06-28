@@ -24,6 +24,9 @@ namespace Capstone.Web.Models
         public int EntryFee { get; set; }
         public int NumberOfAnimalSpecies { get; set; }
 
-        public List<Weather> nextFiveDayWeather { get; set; }
+        public List<Weather> NextFiveDayWeather { get; set; }
+
+        public List<SelectListItem> ValidParkCodes { get; set; }
+
     }
 }
