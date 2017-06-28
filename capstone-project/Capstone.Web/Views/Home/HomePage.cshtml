@@ -14,15 +14,17 @@
         @foreach (NationalPark park in Model)
         {
            <div>
-                <a href="@Url.Action("ParkDetailPage", "Home", new { id = park.ParkCode })" >
+                <a href="@Url.Action("ParkDetail", "Home", new { code = park.ParkCode })" >
                     <img src="@("/Content/img/parks/" + park.ParkCode.ToLower() + ".jpg")" />
                </a>
-           </div> 
+           </div>
 
-           <div>@park.ParkName</div>
-           <div>@park.State</div>
-           <div>@park.ParkDescription</div>
-        }
-    </div>
+            <a href="@Url.Action("ParkDetail", "Home", new { code = park.ParkCode })">
+                <div>@park.ParkName</div>
+            </a>
+            <div>@park.State</div>
+            <div>@park.ParkDescription</div>
+            }
+</div>
 
 </section>

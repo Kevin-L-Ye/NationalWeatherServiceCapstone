@@ -10,6 +10,7 @@ namespace Capstone.Web.DAL
     public class NationalParkSqlDAL : INationalParkDAL
     {
         private string connectionString;
+        
         private string SQL_GetAllParks = @"SELECT * FROM park;";
         
         public NationalParkSqlDAL (string connectionString)

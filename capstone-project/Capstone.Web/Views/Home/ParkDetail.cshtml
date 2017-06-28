@@ -1,0 +1,44 @@
+﻿@using Capstone.Web.Models;
+@model NationalPark
+
+@{
+    ViewBag.Title = "ParkDetail";
+    Layout = "~/Views/Shared/shared_layout.cshtml";
+}
+
+<section class="centeredPanel">
+
+    <h2>Park Detail</h2>
+
+    <div>
+        <img src="@("/Content/img/parks/" + Model.ParkCode.ToLower() + ".jpg")"/>
+    </div>
+
+    <div>
+        @Model.ParkName
+    </div>
+
+    <div>
+        <p>"@Model.InspirationalQuote" - @Model.InspirationalQuoteSource</p>
+    </div>
+
+    <div>
+        <p>@Model.State | Climate: @Model.Climate</p>
+        <p>Number of Campsites: @Model.NumberOfCampsites | Entry Fee: @(Convert.ToDecimal(Model.EntryFee).ToString("C"))</p>
+    </div>
+
+    <div>
+        @Model.ParkDescription
+    </div>
+
+    <ul>
+        <li>Year Founded: @Model.YearFounded</li>
+        <li>Annual Visitors: @Model.AnnualVisitorCount.ToString("N0")</li>
+        <li>Acreage: @Model.Acreage.ToString("N0")</li>
+        <li>Elevation: @Model.ElevationInFeet.ToString("N0") feet</li>
+        <li>Number of Animal Species: @Model.NumberOfAnimalSpecies.ToString("N0")</li>
+        <li>Miles of Trail: @Model.MilesOfTrail.ToString("N0") miles</li>
+    </ul>
+
+</section>
+

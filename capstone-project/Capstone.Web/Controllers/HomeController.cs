@@ -27,5 +27,13 @@ namespace Capstone.Web.Controllers
             List <NationalPark> parks = parkDAL.GetAllParks();
             return View("HomePage", parks);
         }
+
+        public ActionResult ParkDetail(string code)
+        {
+            List<NationalPark> parks = parkDAL.GetAllParks();
+            NationalPark model = parks.FirstOrDefault(p => p.ParkCode == code);
+
+            return View("ParkDetail", model);
+        }
     }
 }
