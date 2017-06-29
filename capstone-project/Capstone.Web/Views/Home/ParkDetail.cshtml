@@ -50,10 +50,10 @@
     </table>
 
     <p style="font-size: 25px;">Current temperatures are in @Session["unitOfTemperature"]</p>
-    @Html.BeginForm("ParkDetail", "Home", FormMethod.Get)
+    @Html.BeginForm("ParkDetail", "Home", FormMethod.Post)
     {
-        @Html.RadioButton("unitOfTemperature", "Fahrenheit");
-        @Html.RadioButton("unitOfTemperature", "Celsius");
+        @Html.RadioButton(m => m.unitOfTemperature, "Fahrenheit");
+        @Html.RadioButton(m => m.unitOfTemperature, "Celsius");
     <button>Change Temperature</button>
     }
 
