@@ -29,14 +29,15 @@ namespace Capstone.Web.Controllers
             List<NationalPark> parks = parkDAL.GetAllParks();
             return View("HomePage", parks);
         }
+
         [HttpGet]
-        public ActionResult ParkDetail()
+        public ActionResult ParkDetail(string code)
         {
             List<NationalPark> parks = parkDAL.GetAllParks();
             NationalPark model = parks.FirstOrDefault(p => p.ParkCode == code);
             model.ValidParkCodes = ConvertListToSelectList(parks);
 
-            string unitOfTemperature = GetUnitOfTemperature();
+            string unitOfTemperature = GetUnitOfTemperature(model);
 
 
             return View("ParkDetail", model);
@@ -46,22 +47,20 @@ namespace Capstone.Web.Controllers
         public ActionResult ParkDetail(NationalPark park)
         {
             Session["unitOfTemperature"] = park.UnitOfTemperature;
-            return SurveyView("ParkDetail", park);
+            return View("ParkDetail", park);
         }
 
-        public string GetUnitOfTemperature()
+        public string GetUnitOfTemperature(NationalPark park)
         {
-            string tempScale = Session["unitOfTemperature"];
-            if (tempScale == null)
+            string tempScale = Convert.ToString(Session["unitOfTemperature"]);
+            if (tempScale == null || tempScale == "")
             {
+                park.UnitOfTemperature = "Fahrenheit";
                 tempScale = "Fahrenheit";
                 Session["unitOfTemperature"] = tempScale;
             }
-
             return tempScale;
         }
-
-
 
         public ActionResult SurveyView()
         {
@@ -97,7 +96,5 @@ namespace Capstone.Web.Controllers
             Dictionary<string, string> favorites = parkDAL.GetFavoriteParks();
             return View("FavoriteParks", favorites);
         }
-
-        public string 
     }
 }

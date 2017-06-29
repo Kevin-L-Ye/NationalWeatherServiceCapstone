@@ -28,7 +28,7 @@ namespace Capstone.Web.Models
 
         public List<SelectListItem> ValidParkCodes { get; set; }
 
-        public string unitOfTemperature { get; set; }
+        public string UnitOfTemperature { get; set; }
 
     }
 }

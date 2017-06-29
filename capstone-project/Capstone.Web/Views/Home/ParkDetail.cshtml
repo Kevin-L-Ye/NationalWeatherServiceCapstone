@@ -50,11 +50,37 @@
     </table>
 
     <p style="font-size: 25px;">Current temperatures are in @Session["unitOfTemperature"]</p>
-    @Html.BeginForm("ParkDetail", "Home", FormMethod.Post)
+    @using (Html.BeginForm("ParkDetail", "Home", FormMethod.Post))
     {
-        @Html.RadioButton(m => m.unitOfTemperature, "Fahrenheit");
-        @Html.RadioButton(m => m.unitOfTemperature, "Celsius");
+        @Html.HiddenFor(m => m.ParkName, Model.ParkName)
+        @Html.HiddenFor(m => m.ParkCode, Model.ParkCode)
+        @Html.HiddenFor(m => m.State, Model.State)
+        @Html.HiddenFor(m => m.Acreage, Model.Acreage)
+        @Html.HiddenFor(m => m.ElevationInFeet, Model.ElevationInFeet)
+        @Html.HiddenFor(m => m.MilesOfTrail, Model.MilesOfTrail)
+        @Html.HiddenFor(m => m.NumberOfCampsites, Model.NumberOfCampsites)
+        @Html.HiddenFor(m => m.Climate, Model.Climate)
+        @Html.HiddenFor(m => m.YearFounded, Model.YearFounded)
+        @Html.HiddenFor(m => m.AnnualVisitorCount, Model.AnnualVisitorCount)
+        @Html.HiddenFor(m => m.InspirationalQuote, Model.InspirationalQuote)
+        @Html.HiddenFor(m => m.InspirationalQuoteSource, Model.InspirationalQuoteSource)
+        @Html.HiddenFor(m => m.ParkDescription, Model.ParkDescription)
+        @Html.HiddenFor(m => m.EntryFee, Model.EntryFee)
+        @Html.HiddenFor(m => m.NumberOfAnimalSpecies, Model.NumberOfAnimalSpecies)
+        @Html.HiddenFor(m => m.NextFiveDayWeather, Model.NextFiveDayWeather)
+        @Html.HiddenFor(m => m.ValidParkCodes, Model.ValidParkCodes)
+
+        <div>
+            <label class="temp_label">Fahrenheit</label>
+            @Html.RadioButtonFor(m => m.UnitOfTemperature, "Fahrenheit")
+        </div>
+        <div>
+            <label class="temp_label">Celsius</label>
+            @Html.RadioButtonFor(m => m.UnitOfTemperature, "Celsius")
+        </div>
+        <br/>
     <button>Change Temperature</button>
+    <br/>
     }
 
     @for(int i = 0; i < 5; i++)
