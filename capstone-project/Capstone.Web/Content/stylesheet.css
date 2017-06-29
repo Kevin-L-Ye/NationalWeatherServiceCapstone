@@ -1,10 +1,64 @@
-﻿body {
+﻿nav ul {
+    width: 100%;
+    display: flex;
+    justify-content: center;
 }
 
-.big_weather_img {
-    width: 300px;
+    nav ul li {
+        border-radius: 8px;
+        list-style: none;
+        text-align: center;
+        flex-grow: 1;
+        padding-top: 5px;
+        padding-bottom: 10px;
+        margin: 0 10px;
+        max-width: 200px;
+        font-size: 30px;
+        background-color: peachpuff;
+    }
+
+li a:hover {
+    text-decoration: underline;
 }
 
-.small_weather_img {
-    
+.main_header{
+    background-color: peru;
+}
+
+section.centeredPanel {
+    background-color: #6f4e37;
+    vertical-align: top;
+    text-align: center;
+    width: 90%;
+    margin: 20px auto;
+}
+
+.home_header {
+    font-size: 40px;
+    padding-bottom: 0px;
+    border-bottom: 0px;
+}
+
+.home_img {
+    border: 10px black;
+}
+
+.home_description {
+    width: 46%;
+    padding-left: 305px;
+}
+
+.home_name {
+    font-size: 35px;
+    color: wheat;
+    text-decoration: none;
+}
+
+.home_state {
+    font-size: 30px;
+    font-weight: bold;
+}
+
+body {
+    background-color: #003C00;
 }

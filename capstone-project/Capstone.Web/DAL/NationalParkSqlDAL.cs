@@ -14,7 +14,8 @@ namespace Capstone.Web.DAL
         private ISurveyDAL surveyDAL;
 
         private string SQL_GetAllParks = @"SELECT * FROM park;";
-        readonly string SQL_GetParkCodes = "SELECT parkCode FROM park GROUP BY parkCode;";
+        private string SQL_GetParkCodes = "SELECT parkCode FROM park GROUP BY parkCode;";
+        private string SQL_GetFavoriteParks = @"SELECT park.parkCode, park.parkName, COUNT(*) AS survey_count FROM park INNER JOIN survey_result ON park.parkCode = survey_result.parkCode GROUP BY park.parkName, park.parkCode ORDER BY survey_count DESC, park.parkName ASC;";
 
         public NationalParkSqlDAL (string connectionString, IWeatherDAL weatherDAL, ISurveyDAL surveyDAL)
         {
@@ -98,35 +99,33 @@ namespace Capstone.Web.DAL
             };
         }
 
-        public Dictionary<string, int> CalculateFavoriteParks()
+        public Dictionary<string, string> GetFavoriteParks()
         {
-            Dictionary<string, int> favoriteParks = new Dictionary<string, int>();
-            List<string> codes = GetParkCodes();
-            List<Survey> surveys = surveyDAL.GetAllSurveys();
-            foreach(Survey item in surveys)
+            Dictionary<string, string> favorites = new Dictionary<string, string>();
+
+            try
             {
-                if (favoriteParks.ContainsKey(item.ParkCode))
+                using (SqlConnection conn = new SqlConnection(connectionString))
                 {
-                    favoriteParks[item.ParkCode] += 1;
-                }
-                else
-                {
-                    favoriteParks.Add(item.ParkCode, 1);
+                    conn.Open();
+
+                    SqlCommand cmd = new SqlCommand(SQL_GetFavoriteParks, conn);
+                    SqlDataReader reader = cmd.ExecuteReader();
+
+                    while (reader.Read())
+                    {
+                        string name = Convert.ToString(reader["parkName"]);
+                        string code = Convert.ToString(reader["parkCode"]);
+                        favorites.Add(name, code);
+                    }
                 }
             }
-            return favoriteParks;
-        }
-
-        public List<NationalPark> GetFavoriteParks()
-        {
-            List<NationalPark> favorites = new List<NationalPark>();
-            List<NationalPark> allParks = GetAllParks();
-            Dictionary<string, int> surveyParks = CalculateFavoriteParks();
-
-            foreach(KeyValuePair<string, int> kvp in surveyParks)
+            catch (SqlException ex)
             {
-
+                throw new Exception(ex.Message);
             }
+            return favorites;
         }
+
     }
 }

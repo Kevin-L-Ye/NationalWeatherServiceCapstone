@@ -67,5 +67,11 @@ namespace Capstone.Web.Controllers
 
             return dropdownlist;
         }
+
+        public ActionResult FavoriteParks()
+        {
+            Dictionary<string, string> favorites = parkDAL.GetFavoriteParks();
+            return View("FavoriteParks", favorites);
+        }
     }
 }

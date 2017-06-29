@@ -1,5 +1,5 @@
 ﻿@using Capstone.Web.Models;
-@model NationalPark
+@model Dictionary<string, string>
 
 @{
     ViewBag.Title = "FavoriteParks";
@@ -9,5 +9,20 @@
 <section class="centeredPanel">
 
     <h2>Favorite Parks</h2>
+
+    <div>
+        @foreach (KeyValuePair<string, string> park in Model)
+        {
+            <div>
+                <img src="@("/Content/img/parks/" + park.Value.ToLower() + ".jpg")" class="home_img" />
+            </div>
+
+            <div class="home_name">@park.Key</div>
+            <div></div>
+            <hr style="color: darkred;" />
+        }
+    </div>
+
+
 
 </section>
