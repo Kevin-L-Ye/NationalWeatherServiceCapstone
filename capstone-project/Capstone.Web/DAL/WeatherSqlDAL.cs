@@ -70,7 +70,6 @@ namespace Capstone.Web.DAL
             }
         }
 
-
         public Weather PopulateWeatherObject(SqlDataReader reader)
         {
             return new Weather()

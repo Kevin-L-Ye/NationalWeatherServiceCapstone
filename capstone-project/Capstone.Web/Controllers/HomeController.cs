@@ -26,15 +26,24 @@ namespace Capstone.Web.Controllers
 
         public ActionResult HomePage()
         {
-            List <NationalPark> parks = parkDAL.GetAllParks();
+            List<NationalPark> parks = parkDAL.GetAllParks();
             return View("HomePage", parks);
         }
 
-        public ActionResult ParkDetail(string code)
+        public ActionResult ParkDetail(string code, string unitOfTemperature)
         {
             List<NationalPark> parks = parkDAL.GetAllParks();
             NationalPark model = parks.FirstOrDefault(p => p.ParkCode == code);
             model.ValidParkCodes = ConvertListToSelectList(parks);
+            if (Session["unitOfTemperature"] == null || unitOfTemperature == "Fahrenheit")
+            {
+                Session["unitOfTemperature"] = "Fahrenheit";
+            }
+            else
+            {
+                Session["unitOfTemperature"] = "Celsius";
+            }
+
 
             return View("ParkDetail", model);
         }
@@ -58,7 +67,7 @@ namespace Capstone.Web.Controllers
         public List<SelectListItem> ConvertListToSelectList(List<NationalPark> parkCodes)
         {
             List<SelectListItem> dropdownlist = new List<SelectListItem>();
-            
+
             foreach (NationalPark n in parkCodes)
             {
                 SelectListItem choice = new SelectListItem() { Text = n.ParkName, Value = n.ParkCode };

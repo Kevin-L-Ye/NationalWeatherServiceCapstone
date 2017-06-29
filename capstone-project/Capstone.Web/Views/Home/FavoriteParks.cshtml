@@ -13,11 +13,13 @@
     <div>
         @foreach (KeyValuePair<string, string> park in Model)
         {
-            <div>
+            
+            <div style="display: inline-block;">
                 <img src="@("/Content/img/parks/" + park.Value.ToLower() + ".jpg")" class="home_img" />
             </div>
 
-            <div class="home_name">@park.Key</div>
+            <div class="home_name" style="display: inline-block;">@park.Key</div>
+            
             <div></div>
             <hr style="color: darkred;" />
         }

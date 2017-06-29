@@ -8,56 +8,72 @@
 
 <section class="centeredPanel">
 
-    <h2>Park Detail</h2>
-
-    <div>
-        <img src="@("/Content/img/parks/" + Model.ParkCode.ToLower() + ".jpg")"/>
-    </div>
-
-    <div>
+    <div class="park_name">
         @Model.ParkName
     </div>
 
-    <div>
-        <p>"@Model.InspirationalQuote" - @Model.InspirationalQuoteSource</p>
+    <img src="@("/Content/img/parks/" + Model.ParkCode.ToLower() + ".jpg")"/>
+
+    <div class="detail_quote">
+        <p style="margin-top: 0px;"><i>"@Model.InspirationalQuote"</i> - @Model.InspirationalQuoteSource</p>
     </div>
 
-    <div>
+    <div class="detail_info">
         <p>@Model.State | Climate: @Model.Climate</p>
         <p>Number of Campsites: @Model.NumberOfCampsites | Entry Fee: @(Convert.ToDecimal(Model.EntryFee).ToString("C"))</p>
     </div>
 
-    <div>
+    <div class="detail_description">
         @Model.ParkDescription
+        <p></p>
     </div>
 
-    <ul>
-        <li>Year Founded: @Model.YearFounded</li>
-        <li>Annual Visitors: @Model.AnnualVisitorCount.ToString("N0")</li>
-        <li>Acreage: @Model.Acreage.ToString("N0")</li>
-        <li>Elevation: @Model.ElevationInFeet.ToString("N0") feet</li>
-        <li>Number of Animal Species: @Model.NumberOfAnimalSpecies.ToString("N0")</li>
-        <li>Miles of Trail: @Model.MilesOfTrail.ToString("N0") miles</li>
-    </ul>
+    <table class="detail_table">
+        <tr>
+            <td>Year Founded: @Model.YearFounded</td>
+        </tr>
+        <tr>
+            <td>Annual Visitors: @Model.AnnualVisitorCount.ToString("N0")</td>
+        </tr>
+        <tr>
+           <td>Acreage: @Model.Acreage.ToString("N0")</td>
+        </tr>
+        <tr>
+           <td>Elevation: @Model.ElevationInFeet.ToString("N0") feet</td>
+        </tr>
+        <tr>
+            <td>Number of Animal Species: @Model.NumberOfAnimalSpecies.ToString("N0")</td>
+        </tr>
+        <tr>
+            <td>Miles of Trail: @Model.MilesOfTrail.ToString("N0") miles</td>
+        </tr>
+    </table>
+
+    <p style="font-size: 25px;">Current temperatures are in @Session["unitOfTemperature"]</p>
+    @Html.BeginForm("ParkDetail", "Home", FormMethod.Get)
+    {
+        @Html.RadioButton("unitOfTemperature", "Fahrenheit");
+        @Html.RadioButton("unitOfTemperature", "Celsius");
+    <button>Change Temperature</button>
+    }
 
     @for(int i = 0; i < 5; i++)
     {
         <div class="five_day_forecast">
-            <p>Current temperatures are in @Session["unitOfTemperature"]</p>
         @if (Model.NextFiveDayWeather[i].FiveDayForecastValue == 1)
         {
-            <div class="big_weather_img">
-                <img src="@("/Content/img/weather/" + Model.NextFiveDayWeather[i].Forecast + ".png")"/>
-                <p>High: @Model.NextFiveDayWeather[i].High</p>
-                <p>Low: @Model.NextFiveDayWeather[i].Low</p>
+            <div>
+                <img src="@("/Content/img/weather/" + Model.NextFiveDayWeather[i].Forecast + ".png")" class="big_weather_img"/>
+                <p class="weather_high">High: @Model.NextFiveDayWeather[i].High</p>
+                <p class="weather_low">Low: @Model.NextFiveDayWeather[i].Low</p>
             </div>
         }
         else
         {
-            <div class="small_weather_img">
-                <img src="@("/Content/img/weather/" + Model.NextFiveDayWeather[i].Forecast + ".png")" />
-                <p>High: @Model.NextFiveDayWeather[i].High</p>
-                <p>Low: @Model.NextFiveDayWeather[i].Low</p>
+            <div>
+                <img src="@("/Content/img/weather/" + Model.NextFiveDayWeather[i].Forecast + ".png")" class="small_weather_img" />
+                <p class="weather_high">High: @Model.NextFiveDayWeather[i].High</p>
+                <p class="weather_low">Low: @Model.NextFiveDayWeather[i].Low</p>
             </div>
         }
         </div>
