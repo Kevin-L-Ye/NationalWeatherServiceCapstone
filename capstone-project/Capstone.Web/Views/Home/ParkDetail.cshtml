@@ -51,34 +51,31 @@
 
     <div class="weather_head">5 DAY WEATHER FORECAST:</div>
 
-    @for(int i = 0; i < 5; i++)
-    {
-        <div class="five_day_forecast">
-        @if (Model.NextFiveDayWeather[i].FiveDayForecastValue == 1)
-        {
-            <div class="big_weather_div">
-                <p style="font-size: 35px; margin-bottom: 0px; margin-top: 0px;">TODAY</p>
-                <img src="@("/Content/img/weather/" + Model.NextFiveDayWeather[i].Forecast + ".png")" class="weather_img"/>
-                @if (Model.UnitOfTemperature == "Celsius")
-                {
-                    <div class="high_low_div">
-                    <p class="weather_high">High: @Model.NextFiveDayWeather[i].FahrenheitToCelsius(Model.NextFiveDayWeather[i].High)°</p>
-                    <p class="weather_low">Low: @Model.NextFiveDayWeather[i].FahrenheitToCelsius(Model.NextFiveDayWeather[i].Low)°</p>
-                    </div>
-                }
-                else
-                {
-                    <div class="high_low_div">
-                    <p class="weather_high">High: @Model.NextFiveDayWeather[i].High°</p>
-                    <p class="weather_low">Low: @Model.NextFiveDayWeather[i].Low°</p>
-                    </div>
-                }
-                <p class="recommend_div">Park Recomendations</p>
-                <p class="advisory_text">@Model.NextFiveDayWeather[i].GetWeatherAdvisory(@Model.NextFiveDayWeather[i].Forecast)</p>
-                <p class="advisory_text">@Model.NextFiveDayWeather[i].GetTempAdvisory(@Model.NextFiveDayWeather[i].High, @Model.NextFiveDayWeather[i].Low)</p>
-            </div>
-        }
-        else
+    <div class="five_day_forecast">
+        <div class="big_weather_div">
+            <p style="font-size: 35px; margin-bottom: 0px; margin-top: 0px;">TODAY</p>
+            <img src="@("/Content/img/weather/" + Model.NextFiveDayWeather[1].Forecast + ".png")" class="weather_img"/>
+            @if (Model.UnitOfTemperature == "Celsius")
+            {
+                <div class="high_low_div">
+                <p class="weather_high">High: @Model.NextFiveDayWeather[0].FahrenheitToCelsius(Model.NextFiveDayWeather[0].High)°</p>
+                <p class="weather_low">Low: @Model.NextFiveDayWeather[0].FahrenheitToCelsius(Model.NextFiveDayWeather[0].Low)°</p>
+                </div>
+            }
+            else
+            {
+                <div class="high_low_div">
+                <p class="weather_high">High: @Model.NextFiveDayWeather[0].High°</p>
+                <p class="weather_low">Low: @Model.NextFiveDayWeather[0].Low°</p>
+                </div>
+            }
+            <p class="recommend_div">Park Recomendations</p>
+            <p class="advisory_text">@Model.NextFiveDayWeather[0].GetWeatherAdvisory(@Model.NextFiveDayWeather[0].Forecast)</p>
+            <p class="advisory_text">@Model.NextFiveDayWeather[0].GetTempAdvisory(@Model.NextFiveDayWeather[0].High, @Model.NextFiveDayWeather[0].Low)</p>
+        </div>
+
+        <div class="four_days">
+        @for (int i = 1; i < 5; i++)
         {
             <div small_weather_div>
                 <img src="@("/Content/img/weather/" + Model.NextFiveDayWeather[i].Forecast + ".png")" class="small_weather_img" />
@@ -95,7 +92,6 @@
             </div>
         }
         </div>
-    }
 
     <p style="font-size: 25px;">Current temperatures are in @Session["unitOfTemperature"]</p>
     @using (Html.BeginForm("ParkDetail", "Home", FormMethod.Post))

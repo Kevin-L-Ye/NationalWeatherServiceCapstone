@@ -31,6 +31,8 @@ section.centeredPanel {
     text-align: center;
     width: 90%;
     margin: 20px auto;
+    border-style: ridge;
+    border-color: black;
 }
 
 body {
@@ -133,7 +135,7 @@ body {
 }
 
 .five_day_forecast {
-    /*display: inline-block;*/
+
 }
 
 .big_weather_div {
@@ -144,10 +146,15 @@ body {
     margin-bottom: 20px;
 }
 
+.four_days {
+    display: inline-block;
+    width: 100%;
+}
+
 .small_weather_div {
     display: inline-block;
     vertical-align: top;
-    float: left;
+    width: 200px;
 }
 
 .small_weather_img {
