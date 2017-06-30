@@ -33,6 +33,11 @@ section.centeredPanel {
     margin: 20px auto;
 }
 
+body {
+    background-color: #003C00;
+}
+
+/*Home Page*/
 .home_header {
     font-size: 40px;
     padding-bottom: 0px;
@@ -41,16 +46,24 @@ section.centeredPanel {
 
 .home_img {
     border: 10px black;
+    width: 50%;
+    margin-top: 20px;
+}
+
+.home_info {
+    display: inline-block;
+    margin-bottom: 30px;
 }
 
 .home_description {
-    width: 46%;
-    padding-left: 305px;
-    font-size: 20px;
+    font-size: 25px;
+    vertical-align: middle;
+    margin-left: 20%;
+    margin-right: 20%;
 }
 
 .park_name {
-    font-size: 50px;
+    font-size: 45px;
     color: wheat;
     text-decoration: none;
     vertical-align: middle;
@@ -64,31 +77,46 @@ section.centeredPanel {
     margin-bottom: 15px;
 }
 
-body {
-    background-color: #003C00;
+/*Detail Page*/
+.detail_img {
+    width: 85%;
+}
+
+.detail_name {
+    font-size: 60px;
+    color: wheat;
+    vertical-align: middle;
+    margin-left: 25%;
+    margin-right: 25%;
+    margin-bottom: 10px;
 }
 
 .detail_table {
     font-size: 25px;
     background-color: burlywood;
-    margin-left: 400px
+    margin-left: 35%;
+    margin-right: 35%;
 }
 
 .detail_quote {
     font-size: 22px;
+    margin-left: 10%;
+    margin-right: 10%;
 }
 
 .detail_info {
     font-size: 25px;
     background-color: burlywood;
     width: 50%;
-    margin-left: 275px;
+    margin-left: 25%;
+    margin-right: 25%;
 }
 
 .detail_description {
     font-size: 23px;
     width: 46%;
-    padding-left: 305px;
+    margin-left: 25%;
+    margin-right: 25%;
     margin-bottom: 30px;
 }
 
@@ -102,4 +130,134 @@ body {
     font-size: 30px;
     color: deepskyblue;
     margin-top: 0px;
+}
+
+.five_day_forecast {
+    /*display: inline-block;*/
+}
+
+.big_weather_div {
+    text-align: center;
+    background-color: burlywood;
+    margin-right: 30%;
+    margin-left: 30%;
+    margin-bottom: 20px;
+}
+
+.small_weather_div {
+    display: inline-block;
+    vertical-align: top;
+    float: left;
+}
+
+.small_weather_img {
+    width: 200px;
+}
+
+.high_low_div {
+    background-color: lightgreen;
+    margin-left: 15%;
+    margin-right: 15%;
+    margin-bottom: 0px;
+}
+
+.recommend_div {
+    font-size: 35px;
+    margin-top: 0px;
+    margin-bottom: 5px;
+    text-decoration: underline;
+}
+.advisory_text {
+    font-size: 22px;
+    margin-top: 0px;
+    margin-bottom: 0px;
+}
+
+.weather_head {
+    color: burlywood;
+    margin-top: 20px;
+    font-size: 45px;
+}
+
+.temp_label {
+    font-size: 30px;
+    font-weight: bold;
+    font-family: Arial
+}
+
+.temp_button {
+    width: 200px;
+    margin-bottom: 20px;
+}
+
+/*Survey Page*/
+.survey_header {
+    font-size: 40px;
+    margin-bottom: 5px;
+}
+
+.survey_detail {
+    font-size: 20px;
+    color: burlywood;
+    text-align: center;
+    margin-top: 0px;
+    margin-bottom: 10px;
+    margin-left: 20%;
+    margin-right: 20%;
+}
+
+.survey_label {
+    color: burlywood;
+    font-size: 35px;
+}
+
+.survey_button {
+    font-size: 25px;
+    color: burlywood;
+    display: inline-block;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.button_label {
+    color: burlywood;
+    font-size: 35px;
+    text-align: left;
+    margin-left: 30%;
+}
+
+.all_buttons {
+   text-align: left;
+   margin-left: 30%;
+}
+
+.formInputGroup {
+    text-align: left;
+    margin-left: 30%;
+    margin-bottom: 10px;
+}
+
+.button_div {
+    margin-bottom: 10px;
+}
+
+/*Favorite Parks*/
+.fav_header {
+    font-size: 40px;
+}
+
+.fav_img {
+    width 50%;
+    margin-bottom: 5%;
+}
+
+.fav_name {
+    font-size: 40px;
+    color: burlywood;
+    vertical-align: top;
+}
+
+.survey_count {
+    font-size: 30px;
+    color: burlywood;
 }

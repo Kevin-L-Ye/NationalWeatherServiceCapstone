@@ -39,15 +39,19 @@ namespace Capstone.Web.Controllers
 
             string unitOfTemperature = GetUnitOfTemperature(model);
 
-
             return View("ParkDetail", model);
         }
 
         [HttpPost]
         public ActionResult ParkDetail(NationalPark park)
         {
+            List<NationalPark> parks = parkDAL.GetAllParks();
+            NationalPark model = parks.FirstOrDefault(p => p.ParkCode == park.ParkCode);
+            model.ValidParkCodes = ConvertListToSelectList(parks);
+
             Session["unitOfTemperature"] = park.UnitOfTemperature;
-            return View("ParkDetail", park);
+            model.UnitOfTemperature = Convert.ToString(Session["unitOfTemperature"]);
+            return View("ParkDetail", model);
         }
 
         public string GetUnitOfTemperature(NationalPark park)
@@ -93,7 +97,7 @@ namespace Capstone.Web.Controllers
 
         public ActionResult FavoriteParks()
         {
-            Dictionary<string, string> favorites = parkDAL.GetFavoriteParks();
+            Dictionary<List<string>, int> favorites = parkDAL.GetFavoriteParks();
             return View("FavoriteParks", favorites);
         }
     }

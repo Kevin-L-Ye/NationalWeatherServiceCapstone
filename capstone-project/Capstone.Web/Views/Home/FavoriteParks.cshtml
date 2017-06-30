@@ -1,5 +1,5 @@
 ﻿@using Capstone.Web.Models;
-@model Dictionary<string, string>
+@model Dictionary<List<string>, int>
 
 @{
     ViewBag.Title = "FavoriteParks";
@@ -8,20 +8,20 @@
 
 <section class="centeredPanel">
 
-    <h2>Favorite Parks</h2>
+    <h2 class="fav_header">Favorite Parks</h2>
 
     <div>
-        @foreach (KeyValuePair<string, string> park in Model)
+        @foreach (KeyValuePair<List<string>, int> park in Model)
         {
-            
+            <div class="fav_name">@park.Key[0]</div>
+            <div class="survey_count">(Surveys Submitted: @park.Value)</div>
+
             <div style="display: inline-block;">
-                <img src="@("/Content/img/parks/" + park.Value.ToLower() + ".jpg")" class="home_img" />
+                <img src="@("/Content/img/parks/" + park.Key[1].ToLower() + ".jpg")" class="fav_img" />
             </div>
 
-            <div class="home_name" style="display: inline-block;">@park.Key</div>
-            
             <div></div>
-            <hr style="color: darkred;" />
+            <hr />
         }
     </div>
 

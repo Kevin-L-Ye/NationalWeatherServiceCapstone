@@ -99,9 +99,9 @@ namespace Capstone.Web.DAL
             };
         }
 
-        public Dictionary<string, string> GetFavoriteParks()
+        public Dictionary<List<string>, int> GetFavoriteParks()
         {
-            Dictionary<string, string> favorites = new Dictionary<string, string>();
+            Dictionary<List<string>, int> favorites = new Dictionary<List<string>, int>();
 
             try
             {
@@ -114,9 +114,13 @@ namespace Capstone.Web.DAL
 
                     while (reader.Read())
                     {
-                        string name = Convert.ToString(reader["parkName"]);
+                        List<string> parkInfo = new List<string>();
                         string code = Convert.ToString(reader["parkCode"]);
-                        favorites.Add(name, code);
+                        string name = Convert.ToString(reader["parkName"]);
+                        int surveyCount = Convert.ToInt32(reader["survey_count"]);
+                        parkInfo.Add(name);
+                        parkInfo.Add(code);
+                        favorites.Add(parkInfo, surveyCount);
                     }
                 }
             }
@@ -124,7 +128,10 @@ namespace Capstone.Web.DAL
             {
                 throw new Exception(ex.Message);
             }
-            return favorites;
+
+
+
+            return (favorites);
         }
 
     }

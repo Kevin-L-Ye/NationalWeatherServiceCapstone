@@ -8,32 +8,40 @@
 
 <section class="centeredPanel">
 
-    <h2>Survey</h2>
+    <h2 class="survey_header">Survey</h2>
+
+    <p class="survey_detail">To help us better our National Parks, please fill out a quick survey detailing your recent experience!</p>
 
     @using (Html.BeginForm("SurveyView", "Home", FormMethod.Post))
     {
         <div class="formInputGroup">
-            <label>Favorite National Park: </label>
+            <label class="survey_label">Favorite National Park: </label>
+            <br />
             @Html.DropDownListFor(m => m.ParkCode, Model.ValidParkCodes)
         </div>
 
         <div class="formInputGroup">
-            <label>Your email: </label>
+            <label class="survey_label">Your email: </label>
+            <br />
             @Html.TextBoxFor(m => m.EmailAddress)
         </div>
 
         <div class="formInputGroup">
-            <label>State of Residence</label>
+            <label class="survey_label">State of Residence: </label>
+            <br />
             @Html.TextBoxFor(m => m.State)
         </div>
 
-        <div>
-            @Html.RadioButtonFor(m => m.ActivityLevel, "Inactive", false)Inactive
-            @Html.RadioButtonFor(m => m.ActivityLevel, "Sedentary", false)Sedentary
-            @Html.RadioButtonFor(m => m.ActivityLevel, "Active", false)Active
-            @Html.RadioButtonFor(m => m.ActivityLevel, "Extremely Active", false)Extremely Active
+        <div class="button_div">
+            <div class="button_label">Activity Level: </div>
+            <div class="all_buttons">
+            @Html.RadioButtonFor(m => m.ActivityLevel, "Inactive", false)<div class="survey_button">Inactive</div>
+            @Html.RadioButtonFor(m => m.ActivityLevel, "Sedentary", false)<div class="survey_button">Sedentary</div>
+            @Html.RadioButtonFor(m => m.ActivityLevel, "Active", false)<div class="survey_button">Active</div>
+            @Html.RadioButtonFor(m => m.ActivityLevel, "Extremely Active", false)<div class="survey_button">Extremely Active</div>
+            </div>
         </div>
 
-        <button>Submit</button>
+        <button style="margin-bottom: 20px;">Submit</button>
     }
 </section>
