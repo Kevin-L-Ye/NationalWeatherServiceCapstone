@@ -24,12 +24,14 @@
             <label class="survey_label">Your email: </label>
             <br />
             @Html.TextBoxFor(m => m.EmailAddress)
+            @Html.ValidationMessageFor(m => m.EmailAddress)
         </div>
 
         <div class="formInputGroup">
             <label class="survey_label">State of Residence: </label>
             <br />
             @Html.TextBoxFor(m => m.State)
+            @Html.ValidationMessageFor(m => m.State)
         </div>
 
         <div class="button_div">
