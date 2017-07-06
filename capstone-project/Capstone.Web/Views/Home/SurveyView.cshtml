@@ -12,6 +12,7 @@
 
     <p class="survey_detail">To help us better our National Parks, please fill out a quick survey detailing your recent experience!</p>
 
+    @Html.ValidationSummary()
     @using (Html.BeginForm("SurveyView", "Home", FormMethod.Post))
     {
         <div class="formInputGroup">
@@ -41,6 +42,7 @@
             @Html.RadioButtonFor(m => m.ActivityLevel, "Sedentary", false)<div class="survey_button">Sedentary</div>
             @Html.RadioButtonFor(m => m.ActivityLevel, "Active", false)<div class="survey_button">Active</div>
             @Html.RadioButtonFor(m => m.ActivityLevel, "Extremely Active", false)<div class="survey_button">Extremely Active</div>
+                @Html.ValidationMessageFor(m => m.ActivityLevel)
             </div>
         </div>
 

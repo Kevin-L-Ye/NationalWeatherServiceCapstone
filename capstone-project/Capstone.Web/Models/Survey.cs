@@ -14,10 +14,12 @@ namespace Capstone.Web.Models
         public int SurveyId { get; set; }
         [Required (ErrorMessage = "Please Select A Park.")]
         public string ParkCode { get; set; }
-        // [DataType(DataType.EmailAddress)]
+        [Required]
+        [DataType(DataType.EmailAddress)]
         public string EmailAddress { get; set; }
         [Required (ErrorMessage = "A State Is Required.")]
         public string State { get; set; }
+        [Required]
         public string ActivityLevel { get; set; }
 
         public List<SelectListItem> ValidParkCodes { get; set; }
